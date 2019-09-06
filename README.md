@@ -26,10 +26,10 @@ Docker container hosting a Cantaloupe instance for the
 2. Download that version's
    [release zip file](https://github.com/medusa-project/cantaloupe/releases)
    into `image_files`.
-    * Of course, you can use any version, as long as the config file contains
-      the right keys for it, and any dependencies are in place.
-3. Copy `env.list.sample` to `env.list` and fill it in. **Don't commit it to
-   version control!**
+    * You can probably use any newer version, as long as the config file
+      contains the right keys for it, and any dependencies are in place.
+3. Copy `env-*.list.sample` to `env-*.list` and fill them in. **Don't commit
+   any to version control!**
 4. `./docker-build.sh`
 
 # Run
@@ -41,8 +41,9 @@ Docker container hosting a Cantaloupe instance for the
 
 ## In ECS
 
-In ECS, `env.list` isn't used, so all of the variables in its "Container
-Runtime Environment Variables" section have to be set in the task definition.
+In ECS, the `*.list` files aren't used, so all of the variables in its
+"Container Runtime Environment Variables" section have to be set in the task
+definition.
 
 1. `./ecr-push.sh`
 2. `./ecs-deploy.sh`

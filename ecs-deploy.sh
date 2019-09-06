@@ -5,12 +5,20 @@
 # insert them into the task pool, and remove the old ones.
 #
 
-source ./env.sh
+if [ $# -lt 1 ]
+then
+    echo "Usage: ecs-deploy.sh <env>"
+    exit 1
+fi
+
+source env.sh env-common.list
+source env.sh env-$1.list
 
 aws ecs update-service \
     --profile $AWS_PROFILE \
     --region $AWS_REGION \
     --cluster $ECS_CLUSTER \
     --service $ECS_SERVICE \
-    --desired-count $TASK_COUNT \
-    --force-new-deployment \
+    --task-definition $ECS_TASK_DEFINITION \
+    --desired-count $ECS_TASK_COUNT \
+    --force-new-deployment

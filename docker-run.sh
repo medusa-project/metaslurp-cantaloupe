@@ -1,8 +1,17 @@
 #!/bin/sh
+#
+# Runs the web app locally.
 
-source ./env.sh
+if [ $# -lt 1 ]
+then
+    echo "Usage: docker-run.sh <env>"
+    exit 1
+fi
 
-docker run \
-    -p 8182:8182 \
-    --env-file env.list \
-    $APP_NAME
+source env.sh env-common.list
+source env.sh env-$1.list
+
+docker run -p $CONTAINER_PORT:$CONTAINER_PORT -it \
+    --env-file "env-common.list" \
+    --env-file "env-$1.list" \
+    $IMAGE_NAME

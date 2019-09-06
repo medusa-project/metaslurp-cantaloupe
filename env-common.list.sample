@@ -1,0 +1,35 @@
+#
+# Contains variables used across environments.
+#
+# Copy to env-common.list and DO NOT commit that file to version control.
+#
+# Feel free to move variables between env-common.list and specific environment
+# files and vice versa.
+#
+
+AWS_PROFILE=
+AWS_REGION=
+
+ECR_HOST=
+CONTAINER_PORT=
+
+ECS_CLUSTER=
+ECS_SUBNET=
+ECS_SECURITY_GROUP=
+
+###########################################################################
+# CONTAINER RUNTIME ENVIRONMENT VARIABLES
+# All of these (plus AWS_REGION above) also need to be present in the ECS
+# task definition.
+###########################################################################
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+
+METASLURP_URL=http://host.docker.internal:3000
+
+# These override cantaloupe.properties keys as follows:
+#     config.file.key => CONFIG_FILE_KEY
+S3SOURCE_ACCESS_KEY_ID=
+S3SOURCE_SECRET_KEY=
+S3CACHE_BUCKET_NAME=
