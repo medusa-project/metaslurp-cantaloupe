@@ -1,7 +1,5 @@
 #!/bin/sh
 
-VERSION=$1
-
 if [ $# -eq 0 ]
   then
     echo "Usage: repackage.sh <cantaloupe version>"
@@ -9,8 +7,9 @@ if [ $# -eq 0 ]
 fi
 
 CWD=$(pwd)
-cd ../cantaloupe
+cd ../../cantaloupe-project/cantaloupe
 mvn clean package -DskipTests
 cd $CWD
-cp ../cantaloupe/target/cantaloupe-$VERSION.zip ./image_files
+rm ./image_files/cantaloupe-*.zip
+cp ../../cantaloupe-project/cantaloupe/target/cantaloupe-*.zip ./image_files
 ./docker-build.sh

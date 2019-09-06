@@ -93,7 +93,7 @@ class CustomDelegate
   def master_image
     identifier = context['identifier']
 
-    url = URL.new(sprintf('%s/it/%s.json',
+    url = URL.new(sprintf('%s/items/%s.json',
         ENV['METASLURP_URL'],
         URI.escape(identifier)))
 
@@ -118,7 +118,7 @@ class CustomDelegate
       return nil
     rescue => e
       Java::edu.illinois.library.cantaloupe.script.Logger
-          .warn('CustomDelegate.master_image: {}', e.message, e)
+          .warn("CustomDelegate.master_image: #{e.message}")
     ensure
       reader&.close
       is&.close
