@@ -6,9 +6,7 @@
 # Feel free to move variables between env-<env name>.list and env-common.list.
 #
 
-APP_NAME=
 IMAGE_NAME=
-DOCKER_TAG=
 
 ECS_SERVICE=
 ECS_TASK_DEFINITION=

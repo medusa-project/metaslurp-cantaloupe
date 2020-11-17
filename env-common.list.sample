@@ -23,13 +23,4 @@ ECS_SECURITY_GROUP=
 # task definition.
 ###########################################################################
 
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-
 METASLURP_URL=http://host.docker.internal:3000
-
-# These override cantaloupe.properties keys as follows:
-#     config.file.key => CONFIG_FILE_KEY
-S3SOURCE_ACCESS_KEY_ID=
-S3SOURCE_SECRET_KEY=
-S3CACHE_BUCKET_NAME=
