@@ -1,4 +1,7 @@
-FROM openjdk:11
+FROM openjdk:11-jre-slim
+
+RUN apt-get update && apt-get install -y \
+  zip
 
 # Install TurboJpegProcessor dependencies
 RUN mkdir -p /opt/libjpeg-turbo/lib
