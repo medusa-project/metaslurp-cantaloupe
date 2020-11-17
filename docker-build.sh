@@ -9,4 +9,4 @@ fi
 source env.sh env-common.list
 source env.sh env-$1.list
 
-docker build -f Dockerfile -t $IMAGE_NAME .
+docker build -t $IMAGE_NAME -t $IMAGE_NAME:$CANTALOUPE_VERSION .

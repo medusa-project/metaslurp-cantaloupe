@@ -1,4 +1,5 @@
-##
+#!/bin/bash
+#
 # Copies Docker environment variables from one of the Docker variable files
 # into shell environment variables.
 #
@@ -15,3 +16,6 @@ while read p; do
     export "${parts[0]}"="${parts[1]}"
   fi
 done < $1
+
+ZIP_FILE=$(ls image_files/cantaloupe-*)
+CANTALOUPE_VERSION=$(echo $ZIP_FILE | sed -En 's/image_files\/cantaloupe-(.+).zip$/\1/p')
