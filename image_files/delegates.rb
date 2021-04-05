@@ -16,11 +16,25 @@ class CustomDelegate
 
   attr_accessor :context
 
+  def deserialize_meta_identifier(meta_identifier)
+  end
+
+  def serialize_meta_identifier(components)
+  end
+
+  def pre_authorize(options = {})
+    true
+  end
+
   def authorize(options = {})
     true
   end
 
   def extra_iiif2_information_response_keys(options = {})
+    {}
+  end
+
+  def extra_iiif3_information_response_keys(options = {})
     {}
   end
 
@@ -49,7 +63,7 @@ class CustomDelegate
   #
   def httpsource_resource_info(options = {})
     image = master_image
-    if image and image['uri'].start_with?('http')
+    if image && image['uri'].start_with?('http')
       return image['uri']
     end
     nil
@@ -69,7 +83,7 @@ class CustomDelegate
   #
   def s3source_object_info(options = {})
     image = master_image
-    if image and image['uri'].start_with?('s3://')
+    if image && image['uri'].start_with?('s3://')
       groups = image['uri'].scan(/[^\/]+/)
       return {
         'bucket' => groups[1],
@@ -84,6 +98,10 @@ class CustomDelegate
   def redactions(options = {})
     []
   end
+
+  def metadata(options = {})
+  end
+
 
   private
 
@@ -117,8 +135,8 @@ class CustomDelegate
     rescue FileNotFoundException => e
       return nil
     rescue => e
-      Java::edu.illinois.library.cantaloupe.script.Logger
-          .warn("CustomDelegate.master_image: #{e.message}")
+      Java::edu.illinois.library.cantaloupe.delegate.Logger
+          .warn("CustomDelegate.master_image(): [#{e.message}] [#{url}]")
     ensure
       reader&.close
       is&.close
