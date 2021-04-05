@@ -3,8 +3,9 @@ Docker container hosting a Cantaloupe instance for the
 
 # Instance Overview
 
-* Cantaloupe runs in standalone mode, using its embedded web server listening
-  on HTTP port 8182.
+* Cantaloupe listens on HTTP port 8182.
+* AWS credentials are obtained from a task IAM role. When running locally,
+  these are obtained from an [ECS Local Endpoint](https://aws.amazon.com/blogs/compute/a-guide-to-locally-testing-containers-with-amazon-ecs-local-endpoints-and-docker-compose/).
 * Identifiers vary depending on the content service. The identifier prefix
   (`dls-*`, `idnc-*`, etc.) is used by the `source()` delegate method to
   determine what Source to use to find a particular image:
@@ -28,6 +29,8 @@ Docker container hosting a Cantaloupe instance for the
    into `image_files`.
     * You can probably use any newer version, as long as the config file
       contains the right keys for it, and any dependencies are in place.
+    * This could be automated, but doing it this way makes it easier to use
+      arbitrary snapshots.
 3. Copy `env-*.list.sample` to `env-*.list` and fill them in. **Don't commit
    any to version control!**
 4. `./docker-build.sh`
@@ -36,8 +39,8 @@ Docker container hosting a Cantaloupe instance for the
 
 ## Locally
 
-1. `./docker-run.sh`
-2. It's now listening at `http://localhost:8182`.
+1. `aws login` ([GitHub](https://github.com/techservicesillinois/awscli-login))
+2. `docker-compose up --build`
 
 ## In ECS
 
@@ -47,3 +50,10 @@ definition.
 
 1. `./ecr-push.sh`
 2. `./ecs-deploy.sh`
+
+# ECS Configuration Notes
+
+Images are tagged with the Cantaloupe version. There is also a `latest` tag
+applied to the latest version which is what is specified in the task
+definition. If there is ever a need to revert to a previous version, the
+task definition must be updated (in Terraform) to specify that version.

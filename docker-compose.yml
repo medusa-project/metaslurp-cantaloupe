@@ -1,0 +1,13 @@
+version: "2"
+services:
+  cantaloupe:
+    build:
+      context: .
+    environment:
+      METASLURP_URL: "${METASLURP_URL}"
+      ENDPOINT_API_USERNAME: "${ENDPOINT_API_USERNAME}"
+      ENDPOINT_API_SECRET: "${ENDPOINT_API_SECRET}"
+      S3CACHE_BUCKET_NAME: "${S3CACHE_BUCKET_NAME}"
+    ports:
+      - 8182:8182
+
