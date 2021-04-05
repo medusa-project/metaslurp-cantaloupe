@@ -12,8 +12,9 @@ fi
 
 while read p; do
   if [[ $p != "#"* && $p != "" ]]; then
-    IFS='=' read -ra parts <<< "$p"
-    export "${parts[0]}"="${parts[1]}"
+    KEY=$(cut -d'=' -f1 <<< $p)
+    VALUE=$(cut -d'=' -f2 <<< $p)
+    export "${KEY}"="${VALUE}"
   fi
 done < $1
 
