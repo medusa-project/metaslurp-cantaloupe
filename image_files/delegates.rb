@@ -1,8 +1,9 @@
 ##
-# This file is for Cantaloupe 4.1 release.
+# This file is for Cantaloupe 5.0.
 #
 
 require 'json'
+require 'uri'
 
 java_import java.net.HttpURLConnection
 java_import java.net.URL
